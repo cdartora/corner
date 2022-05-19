@@ -3,7 +3,7 @@ import style from './style';
 
 function App() {
   return (
-    <div className={style.container}>
+    <div className="container bg-neutral-100 h-full">
       <Timer />
     </div>
   )
