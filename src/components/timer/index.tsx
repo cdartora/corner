@@ -8,7 +8,7 @@ const tabs = {
     time: 25,
   },
   Short: {
-    time: 5,
+    time: 1,
   },
   Long: {
     time: 15,
