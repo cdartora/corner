@@ -1,26 +1,26 @@
-import React, { useEffect, useState } from 'react'
-import { Play, Pause } from 'phosphor-react'
+import React, { useContext, useEffect, useState } from 'react'
+import { Play, Pause, Wrench } from 'phosphor-react'
 import softAlarm from '../../assets/sounds/sweetalertsound4.mp3';
+import doubleClick from '../../assets/sounds/onoff.mp3';
 import UIfx from 'uifx';
+import Settings from './Settings';
+import SettingsContext from '../../context/SettingsContext';
 
 interface CountdownProps {
   time: number;
 }
 
-const alarm = new UIfx(softAlarm, {
-  volume: 0.2
-})
+const alarm = new UIfx(softAlarm)
+const click = new UIfx(doubleClick)
 
 export function Countdown({ time }: CountdownProps) {
-  const [minutes, setMinutes] = useState(0);
-  const [seconds, setSeconds] = useState(2);
-  const [timer, setTimer] = (`${time}:00`)
+  const [minutes, setMinutes] = useState(time);
+  const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const [hasStarted, setHasStarted] = useState(false);
-  const [isRainingConfetti, setIsRainingConfetti] = useState(false);
+  const { selectedIndex, setSelectedIndex } = useContext(SettingsContext);
 
   function toggle() {
-    if (!hasStarted) setHasStarted(true);
+    click.play().setVolume(0.3);
     setIsActive(!isActive);
   }
 
@@ -31,13 +31,17 @@ export function Countdown({ time }: CountdownProps) {
   }
 
   function end() {
-    setIsRainingConfetti(true);
-    alarm.play();
+    alarm.play().setVolume(0.3);
+    if (selectedIndex === 2 || selectedIndex === 1) {
+      setSelectedIndex && setSelectedIndex(0);
+    } else if (selectedIndex === 0) {
+      setSelectedIndex && setSelectedIndex(1);
+    }
     reset();
   }
 
   useEffect(() => {
-    let interval: number | undefined = undefined;
+    let interval: NodeJS.Timer | undefined = undefined;
 
     if (isActive) {
       interval = setInterval(() => {
@@ -58,7 +62,7 @@ export function Countdown({ time }: CountdownProps) {
 
   return (
     <div className='flex flex-col justify-center align-center'>
-      <div>
+      <div className='flex justify-center'>
         {
           minutes < 10 && '0'
         }
@@ -68,7 +72,7 @@ export function Countdown({ time }: CountdownProps) {
         }
         {seconds}
       </div>
-      <div className='flex justify-center align-center mt-6'>
+      <div className='flex justify-center align-center mt-6 gap-2'>
         <button onClick={toggle}
           className={isActive ? 'text-sm bg-red-400 p-2 rounded-sm px-14'
             : 'text-sm bg-green-400 p-2 rounded-sm px-14'}
@@ -77,7 +81,8 @@ export function Countdown({ time }: CountdownProps) {
             isActive ? <Pause className='text-neutral-300' weight='fill' /> : <Play className='text-neutral-300' weight='fill' />
           }
         </button>
+        <Settings />
       </div>
-    </div>
+    </div >
   )
 }
