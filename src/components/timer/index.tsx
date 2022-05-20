@@ -8,7 +8,7 @@ export function Timer() {
   const { tabs, selectedIndex, setSelectedIndex } = useContext(SettingsContext);
 
   return (
-    <div className="flex flex-col container-md h-[50%] min-h-[14rem] m-5 min-w-[30rem] w-[calc(100vw-50rem)] p-0 bg-background rounded-md">
+    <div className="flex flex-col container-md h-[350px] min-h-[14rem] m-5 mt-36 min-w-[200px] w-[500px] p-0 bg-background rounded-md">
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
         <Tab.List className='flex p-1 m-1 space-x-1 rounded-md bg-buttonBackground' >
           {

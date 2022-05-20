@@ -3,7 +3,7 @@ import Provider from './context/settingsProvider';
 
 function App() {
   return (
-    <div className="flex flex-col justify-center items-center container h-screen w-screen my-auto">
+    <div className="flex flex-col justify-center items-center">
       <Provider>
         <Timer />
       </Provider>
