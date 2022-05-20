@@ -8,22 +8,25 @@ export function Timer() {
   const { tabs, selectedIndex, setSelectedIndex } = useContext(SettingsContext);
 
   return (
-    <div className="container-md m-5 px-0 border-2 border-slate-800 rounded-sm">
+    <div className="flex flex-col container-md h-[50%] min-h-[14rem] m-5 min-w-[30rem] w-[calc(100vw-50rem)] p-0 bg-background rounded-md">
       <Tab.Group selectedIndex={selectedIndex} onChange={setSelectedIndex}>
-        <Tab.List className='flex flex-1 justify-center' >
+        <Tab.List className='flex p-1 m-1 space-x-1 rounded-md bg-buttonBackground' >
           {
             tabs && Object.keys(tabs).map((key) => (
-              <Tab className={({ selected }) => selected ? 'px-4 py-1 my-4 mx-1 bg-slate-300 rounded-sm text-slate-800' :
-                'px-4 py-1 my-4 mx-1 bg-slate-800 rounded-sm text-slate-300'} >
+              <Tab className={({ selected }) => selected ? (
+                'w-full rounded-md py-2.5 text-md font-medium leading-5 text-focusText bg-widgetBackground shadow'
+              ) : (
+                'w-full rounded-md py-2.5 text-md font-semibold leading-5 text-widgetBackground hover:bg-widgetBackground/[0.30]'
+              )} >
                 {key}
               </Tab>
             ))
           }
         </Tab.List>
-        <Tab.Panels className='p-5 flex justify-center align-center' >
+        <Tab.Panels className='flex justify-center align-center w-full h-full' >
           {
             tabs && Object.values(tabs).map(({ time }) => (
-              <Tab.Panel className='text-5xl'>
+              <Tab.Panel className='w-full' >
                 <Countdown time={time} />
               </Tab.Panel>
             ))
@@ -33,3 +36,7 @@ export function Timer() {
     </div>
   )
 }
+function classNames(): string {
+  throw new Error('Function not implemented.')
+}
+

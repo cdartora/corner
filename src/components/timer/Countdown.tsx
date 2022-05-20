@@ -61,8 +61,8 @@ export function Countdown({ time }: CountdownProps) {
   }, [isActive, minutes, seconds]);
 
   return (
-    <div className='flex flex-col justify-center align-center'>
-      <div className='flex justify-center'>
+    <div className='flex flex-col justify-center items-center h-full'>
+      <div className='flex justify-center items-center font-semibold text-8xl mt-auto text-focusText'>
         {
           minutes < 10 && '0'
         }
@@ -72,10 +72,10 @@ export function Countdown({ time }: CountdownProps) {
         }
         {seconds}
       </div>
-      <div className='flex justify-center align-center mt-6 gap-2'>
+      <div className='flex items-center mt-auto m-1 w-[98%] gap-1'>
         <button onClick={toggle}
-          className={isActive ? 'text-sm bg-red-400 p-2 rounded-sm px-14'
-            : 'text-sm bg-green-400 p-2 rounded-sm px-14'}
+          className={isActive ? 'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-red-400 p-2 px-14 hover:bg-red-500 transition-colors'
+            : 'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-green-400 p-2 px-14 hover:bg-green-500 transition-colors'}
         >
           {
             isActive ? <Pause className='text-neutral-300' weight='fill' /> : <Play className='text-neutral-300' weight='fill' />

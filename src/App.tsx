@@ -1,14 +1,15 @@
 import { Timer } from './components/timer';
 import Provider from './context/settingsProvider';
-import style from './style';
 
 function App() {
   return (
-    <div className="container bg-neutral-100 h-full">
+    <div className="flex flex-col justify-center items-center container h-screen w-screen my-auto">
       <Provider>
-
         <Timer />
       </Provider>
+      <div className='absolute bottom-1 text-focusText'>
+        feito com ♥ por <a className='underline underline-offset-1' target='_blank' href="https://carlos-dartora.super.site">Carlos Dartora</a>
+      </div>
     </div>
   )
 }

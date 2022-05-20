@@ -36,8 +36,8 @@ export default function Settings() {
 
   return (
     <Popover>
-      <Popover.Button className='text-sm bg-red-400 p-2 rounded-sm'>
-        <Wrench className='text-neutral-300' weight='fill' />
+      <Popover.Button className='flex items-center justify-center w-12 rounded-md h-12 py-2.5 text-md bg-buttonBackground font-medium leading-5 hover:bg-[#B7B7B7 ] '>
+        <Wrench className='text-widgetBackground' weight='fill' />
       </Popover.Button>
 
       <Popover.Panel>
