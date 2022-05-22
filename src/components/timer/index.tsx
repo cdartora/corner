@@ -1,7 +1,6 @@
-import React, { useContext } from 'react'
+import { useContext } from 'react'
 import { Tab } from '@headlessui/react'
 import { Countdown } from './Countdown'
-import Provider from '../../context/settingsProvider'
 import SettingsContext from '../../context/SettingsContext'
 
 export function Timer() {
@@ -35,8 +34,5 @@ export function Timer() {
       </Tab.Group>
     </div>
   )
-}
-function classNames(): string {
-  throw new Error('Function not implemented.')
 }
 
