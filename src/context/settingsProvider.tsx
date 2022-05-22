@@ -18,12 +18,15 @@ function Provider({ children }: ProviderProps) {
     },
   });
   const [selectedIndex, setSelectedIndex] = useState(0);
+  const [pomodoroCount, setPomodoroCount] = useState(0);
 
   const contextValue: Context = {
     tabs,
     setTabs,
     selectedIndex,
     setSelectedIndex,
+    pomodoroCount,
+    setPomodoroCount,
   };
 
   return (

@@ -17,6 +17,8 @@ export type Context = {
   setTabs?: Dispatch<SetStateAction<Tabs>>;
   selectedIndex: number;
   setSelectedIndex?: Dispatch<SetStateAction<number>>;
+  pomodoroCount: number;
+  setPomodoroCount?: Dispatch<SetStateAction<number>>;
 }
 
 const SettingsContext = createContext<Context>({
@@ -32,6 +34,7 @@ const SettingsContext = createContext<Context>({
     },
   },
   selectedIndex: 0,
+  pomodoroCount: 0,
 });
 
 export default SettingsContext;

@@ -17,7 +17,7 @@ export function Countdown({ time }: CountdownProps) {
   const [minutes, setMinutes] = useState(time);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const { selectedIndex, setSelectedIndex } = useContext(SettingsContext);
+  const { selectedIndex, setSelectedIndex, pomodoroCount, setPomodoroCount } = useContext(SettingsContext);
 
   function toggle() {
     click.play().setVolume(0.3);
@@ -32,10 +32,11 @@ export function Countdown({ time }: CountdownProps) {
 
   function end() {
     alarm.play().setVolume(0.3);
-    if (selectedIndex === 2 || selectedIndex === 1) {
+    if (selectedIndex === 1 || selectedIndex === 2) {
       setSelectedIndex && setSelectedIndex(0);
     } else if (selectedIndex === 0) {
-      setSelectedIndex && setSelectedIndex(1);
+      setSelectedIndex && setSelectedIndex(pomodoroCount < 3 ? 1 : 2);
+      setPomodoroCount && setPomodoroCount(pomodoroCount < 3 ? 0 : pomodoroCount + 1);
     }
     reset();
   }

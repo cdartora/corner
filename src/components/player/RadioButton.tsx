@@ -15,7 +15,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
   useEffect(() => {
     // abaixa o volume da música
     if (audioPlayer.current) {
-      audioPlayer.current.volume = 0.4;
+      audioPlayer.current.volume = 0.1;
       audioPlayer.current.loop = true;
     }
   }, [])
