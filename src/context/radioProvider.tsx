@@ -8,7 +8,7 @@ interface ProviderProps {
 function Provider({ children }: ProviderProps) {
   const [playing, setPlaying] = useState<string | null>(null);
 
-  const changeStation = (genre: string) => {
+  const changeStation = (genre: string | null) => {
     setPlaying(genre);
   };
 

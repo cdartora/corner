@@ -23,6 +23,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
 
     if (playing !== genre && audioPlayer.current) {
       audioPlayer.current.pause();
+      setIsPlaying(false);
     }
   }, [playing])
 
@@ -38,6 +39,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
     if (isPlaying) {
       audioPlayer.current?.pause();
       setIsPlaying(!isPlaying)
+      // changeStation && changeStation(null);
     } else {
       audioPlayer.current?.play();
       setIsPlaying(!isPlaying)
