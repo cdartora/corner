@@ -19,8 +19,6 @@ export default function Settings() {
   }, [])
 
   function changeSettings() {
-    console.log('salvou');
-
     setTabs && setTabs({
       Focus: {
         time: focus,
@@ -41,36 +39,56 @@ export default function Settings() {
       </Popover.Button>
 
       <Popover.Panel>
-        <div className='flex mt-2 flex-col align-center bg-slate-300 shadow-lg border-2 border-slate-800 text-sm absolute p-5 rounded-md'>
+        <div className='flex mt-3 flex-col align-center bg-background shadow absolute p-5 rounded-md'>
 
-          Focus time:
-          <input
-            id='focus'
-            value={focus}
-            onChange={(e) => setFocus(+(e.target.value))}
-            type="number"
-            className='rounded-sm'
-          />
+          <label htmlFor="focus" className='flex gap-3 justify-evenly items-center m-2'>
+            <p
+              className='text-lg text-focusText font-bold'
+            >
+              Focus time:
+            </p>
+            <input
+              id="focus"
+              value={focus}
+              onChange={(e) => setFocus(+(e.target.value))}
+              type="input"
+              className='rounded-md text-center px-2 py-1 w-10 text-lg font-bold text-focusText focus:ring-offset-0 ring-buttonBackground'
+            />
+          </label>
 
-          Break time:
-          <input
-            type="text"
-            value={short}
-            onChange={(e) => setShort(+(e.target.value))}
-            className='rounded-sm'
-          />
+          <label htmlFor="focus" className='flex gap-3 justify-evenly items-center m-2'>
+            <p
+              className='text-lg text-focusText font-bold'
+            >
+              Short time:
+            </p>
+            <input
+              id="short"
+              value={short}
+              onChange={(e) => setShort(+(e.target.value))}
+              type="input"
+              className='rounded-md text-center px-2 py-1 w-10 text-lg font-bold text-focusText focus:ring-offset-0 ring-buttonBackground'
+            />
+          </label>
 
-          Long Break time:
-          <input
-            type="text"
-            value={longBreak}
-            onChange={(e) => setLongBreak(+(e.target.value))}
-            className='rounded-sm'
-          />
+          <label htmlFor="focus" className='flex gap-3 justify-evenly items-center m-2'>
+            <p
+              className='text-lg text-focusText font-bold'
+            >
+              Long time:
+            </p>
+            <input
+              id="long"
+              value={longBreak}
+              onChange={(e) => setLongBreak(+(e.target.value))}
+              type="input"
+              className='rounded-md text-center px-2 py-1 w-10 text-lg font-bold text-focusText focus:ring-offset-0 ring-buttonBackground'
+            />
+          </label>
 
           <button
             type='button'
-            className='py-1 px-4 bg-slate-800 mt-2 rounded-md text-slate-300'
+            className='py-2 px-4 bg-green-400 font-bold mt-2 rounded-md text-widgetBackground hover:bg-green-500 transition-colors'
             onClick={changeSettings}
           >
             Save
