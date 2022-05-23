@@ -1,5 +1,6 @@
 import { Pause, Play } from 'phosphor-react';
-import React, { AudioHTMLAttributes, LegacyRef, useEffect, useRef, useState } from 'react'
+import React, { AudioHTMLAttributes, LegacyRef, useContext, useEffect, useRef, useState } from 'react'
+import RadioContext from '../../context/RadioContext';
 
 interface RadioButtonProps {
   genre: string;
@@ -10,6 +11,7 @@ interface RadioButtonProps {
 export default function RadioButton({ genre, image, source }: RadioButtonProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
+  const { playing, changeStation } = useContext(RadioContext);
   const audioPlayer = useRef<HTMLAudioElement | null>(null);
 
   useEffect(() => {
@@ -18,7 +20,11 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
       audioPlayer.current.volume = 0.1;
       audioPlayer.current.loop = true;
     }
-  }, [])
+
+    if (playing !== genre && audioPlayer.current) {
+      audioPlayer.current.pause();
+    }
+  }, [playing])
 
   const onHovering = () => {
     setIsHovering(true);
@@ -35,6 +41,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
     } else {
       audioPlayer.current?.play();
       setIsPlaying(!isPlaying)
+      changeStation && changeStation(genre);
     }
   };
 
