@@ -13,35 +13,38 @@ import RadioButton from './RadioButton.js';
 
 const musicData = {
   animalCrossing: {
+    title: 'Animal Crossing',
     image: animalCrossingImage,
     source: animalCrossingSource,
   },
   classical: {
+    title: 'Classical',
     image: classicalImage,
     source: classicalSource,
   },
   hipHop: {
+    title: 'Hip-Hop',
     image: hipHopImage,
     source: hipHopSource,
   },
   loFi: {
+    title: 'Lo-Fi',
     image: loFiImage,
     source: loFiSource,
   },
   nature: {
+    title: 'Nature',
     image: natureImage,
     source: natureSource,
   },
 };
-
-// export type musicGenre = typeof musicData;
 
 export default function Radio() {
   return (
     <div className='flex gap-3'>
       {
         Object.entries(musicData).map(([key, value]) => (
-          <RadioButton key={key} genre={key} image={value.image} source={value.source} />
+          <RadioButton key={key} genre={value.title} image={value.image} source={value.source} />
         ))
       }
     </div>

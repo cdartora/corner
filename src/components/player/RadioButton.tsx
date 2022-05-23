@@ -41,7 +41,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
   return (
     <div
       style={{ backgroundImage: `url(${image})`, backgroundSize: 'cover' }}
-      className='w-16 rounded-md h-16 cursor-pointer flex items-center justify-center shadow'
+      className='w-16 p-2 rounded-md h-16 cursor-pointer flex items-center justify-center text-center shadow'
       onClick={handleClick}
       onMouseEnter={onHovering}
       onMouseLeave={onLeaving}
@@ -58,7 +58,7 @@ export default function RadioButton({ genre, image, source }: RadioButtonProps) 
               )
             }
           </>
-        ) : <></>
+        ) : <p className='text-widgetBackground text-sm font-bold'>{genre}</p>
       }
     </div>
   )
