@@ -1,11 +1,11 @@
 import { Wrench } from 'phosphor-react'
 import { Popover } from '@headlessui/react'
-import { useContext, useEffect, useState } from 'react'
+import { LegacyRef, useContext, useEffect, useState } from 'react'
 import SettingsContext from '../../context/SettingsContext'
+import { usePopper } from 'react-popper';
 
 export default function Settings() {
   const { setTabs, tabs } = useContext(SettingsContext);
-
   const [focus, setFocus] = useState<number>(0);
   const [short, setShort] = useState<number>(0);
   const [longBreak, setLongBreak] = useState<number>(0);
