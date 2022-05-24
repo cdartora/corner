@@ -36,7 +36,7 @@ export function Countdown({ time }: CountdownProps) {
       setSelectedIndex && setSelectedIndex(0);
     } else if (selectedIndex === 0) {
       setSelectedIndex && setSelectedIndex(pomodoroCount < 3 ? 1 : 2);
-      setPomodoroCount && setPomodoroCount(pomodoroCount < 3 ? 0 : pomodoroCount + 1);
+      setPomodoroCount && setPomodoroCount(pomodoroCount === 3 ? 0 : pomodoroCount + 1);
     }
     reset();
   }
