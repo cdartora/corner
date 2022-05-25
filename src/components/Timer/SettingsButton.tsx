@@ -1,19 +1,21 @@
-import { Wrench } from 'phosphor-react'
-import { Popover } from '@headlessui/react'
-import { LegacyRef, useContext, useEffect, useState } from 'react'
-import SettingsContext from '../../context/SettingsContext'
-import { usePopper } from 'react-popper';
+import { useContext, useEffect, useState } from 'react';
 
-export default function Settings() {
+import { Popover } from '@headlessui/react';
+import { Wrench } from 'phosphor-react';
+
+import SettingsContext from '../../context/SettingsContext';
+
+export default function SettingsButton() {
   const { setTabs, tabs } = useContext(SettingsContext);
+
   const [focus, setFocus] = useState<number>(0);
   const [short, setShort] = useState<number>(0);
-  const [longBreak, setLongBreak] = useState<number>(0);
+  const [long, setLong] = useState<number>(0);
 
   useEffect(() => {
     if (tabs) {
       setShort(tabs.Short.time);
-      setLongBreak(tabs.Long.time);
+      setLong(tabs.Long.time);
       setFocus(tabs.Focus.time);
     }
   }, [])
@@ -27,7 +29,7 @@ export default function Settings() {
         time: short,
       },
       Long: {
-        time: longBreak,
+        time: long,
       }
     })
   }
@@ -56,7 +58,7 @@ export default function Settings() {
             />
           </label>
 
-          <label htmlFor="focus" className='flex gap-3 justify-evenly items-center m-2'>
+          <label htmlFor="short" className='flex gap-3 justify-evenly items-center m-2'>
             <p
               className='text-lg text-focusText font-bold'
             >
@@ -71,7 +73,7 @@ export default function Settings() {
             />
           </label>
 
-          <label htmlFor="focus" className='flex gap-3 justify-evenly items-center m-2'>
+          <label htmlFor="long" className='flex gap-3 justify-evenly items-center m-2'>
             <p
               className='text-lg text-focusText font-bold'
             >
@@ -79,8 +81,8 @@ export default function Settings() {
             </p>
             <input
               id="long"
-              value={longBreak}
-              onChange={(e) => setLongBreak(+(e.target.value))}
+              value={long}
+              onChange={(e) => setLong(+(e.target.value))}
               type="input"
               className='rounded-md text-center px-2 py-1 w-10 text-lg font-bold text-focusText focus:ring-offset-0 ring-buttonBackground'
             />

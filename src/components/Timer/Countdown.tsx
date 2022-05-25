@@ -1,23 +1,33 @@
-import React, { useContext, useEffect, useState } from 'react'
-import { Play, Pause, Wrench } from 'phosphor-react'
-import softAlarm from '../../assets/sounds/sweetalertsound4.mp3';
-import doubleClick from '../../assets/sounds/onoff.mp3';
+import { useContext, useEffect, useState } from 'react';
+
+import { Play, Pause } from 'phosphor-react';
 import UIfx from 'uifx';
-import Settings from './Settings';
+
+import pomodoroAlarm from '../../assets/sounds/pomodoro-alarm.mp3';
+import buttonFx from '../../assets/sounds/buttonfx.mp3';
+
 import SettingsContext from '../../context/SettingsContext';
+import SettingsButton from './SettingsButton';
+import { Tabs } from '../../types/tabs';
+
+const alarm = new UIfx(pomodoroAlarm);
+const click = new UIfx(buttonFx);
 
 interface CountdownProps {
   time: number;
 }
 
-const alarm = new UIfx(softAlarm)
-const click = new UIfx(doubleClick)
-
 export function Countdown({ time }: CountdownProps) {
+  const {
+    selectedIndex,
+    setSelectedIndex,
+    pomodoroCount,
+    setPomodoroCount
+  } = useContext(SettingsContext);
+
   const [minutes, setMinutes] = useState(time);
   const [seconds, setSeconds] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  const { selectedIndex, setSelectedIndex, pomodoroCount, setPomodoroCount } = useContext(SettingsContext);
 
   function toggle() {
     click.play().setVolume(0.3);
@@ -32,9 +42,9 @@ export function Countdown({ time }: CountdownProps) {
 
   function end() {
     alarm.play().setVolume(0.3);
-    if (selectedIndex === 1 || selectedIndex === 2) {
-      setSelectedIndex && setSelectedIndex(0);
-    } else if (selectedIndex === 0) {
+    if (selectedIndex === Tabs.Short || selectedIndex === Tabs.Long) {
+      setSelectedIndex && setSelectedIndex(Tabs.Focus);
+    } else if (selectedIndex === Tabs.Focus) {
       setSelectedIndex && setSelectedIndex(pomodoroCount < 3 ? 1 : 2);
       setPomodoroCount && setPomodoroCount(pomodoroCount === 3 ? 0 : pomodoroCount + 1);
     }
@@ -58,7 +68,6 @@ export function Countdown({ time }: CountdownProps) {
     }
 
     return () => clearInterval(interval);
-
   }, [isActive, minutes, seconds]);
 
   return (
@@ -74,15 +83,23 @@ export function Countdown({ time }: CountdownProps) {
         {seconds}
       </div>
       <div className='flex items-center mt-auto m-1 w-[98%] gap-1'>
-        <button onClick={toggle}
-          className={isActive ? 'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-red-400 p-2 px-14 hover:bg-red-500 transition-colors'
-            : 'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-green-400 p-2 px-14 hover:bg-green-500 transition-colors'}
+        <button
+          onClick={toggle}
+          className={
+            isActive ?
+              'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-red-400 p-2 px-14 hover:bg-red-500 transition-colors' :
+              'flex items-center justify-center w-full h-12 rounded-md py-2.5 text-md font-medium leading-5 bg-green-400 p-2 px-14 hover:bg-green-500 transition-colors'
+          }
         >
           {
-            isActive ? <Pause className='text-neutral-300' weight='fill' /> : <Play className='text-neutral-300' weight='fill' />
+            isActive ? (
+              <Pause className='text-neutral-300' weight='fill' />
+            ) : (
+              <Play className='text-neutral-300' weight='fill' />
+            )
           }
         </button>
-        <Settings />
+        <SettingsButton />
       </div>
     </div >
   )
