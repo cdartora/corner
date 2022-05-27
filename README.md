@@ -10,6 +10,7 @@ Corner possuí um timer pomodoro que automaticamente avalia e retorna em qual se
 - Vite
 - Typescript
 - Tailwindcss
+- Postcss
 - Headless-UI
 - UIfx
 
