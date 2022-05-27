@@ -14,4 +14,4 @@ Corner possuí um timer pomodoro que automaticamente avalia e retorna em qual se
 - UIfx
 
 ## Aonde usar?
-(Corner Website)[https://corner-lac.vercel.app/]
+[Corner Website](https://corner-lac.vercel.app/)
